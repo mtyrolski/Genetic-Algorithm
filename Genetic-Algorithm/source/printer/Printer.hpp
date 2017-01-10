@@ -24,12 +24,6 @@ private:
 		yellow
 	};
 
-	enum class INTENSITY
-	{
-		YES,
-		NO
-	};
-
 	void setForegroundColor(COLOR color);
 	void matchColor(std::string colorString);
 
