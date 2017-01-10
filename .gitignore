@@ -52,3 +52,10 @@ Temporary Items
 *.db
 *.filters
 *.user
+*.tlog
+*.exe
+*.pdb
+*.obj
+*.log
+*.idb
+*.ilk

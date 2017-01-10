@@ -4,6 +4,9 @@
 #include <Windows.h>
 #include <stdlib.h>
 #include <fstream>
+#include <string>
+
+#include "config/Config.hpp"
 
 class Printer
 {
