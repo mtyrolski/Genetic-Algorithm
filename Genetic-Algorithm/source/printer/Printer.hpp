@@ -31,7 +31,7 @@ private:
 	};
 
 	void setForegroundColor(COLOR color);
-
+	void matchColor(std::string colorString);
 
 	HANDLE hout;
 };

@@ -8,15 +8,17 @@ Printer::Printer()
 
 void Printer::printMenu()
 {
-	setForegroundColor(COLOR::yellow);
-
 	std::ifstream ifile(constants::path::menu, std::ifstream::in);
 
 	std::string line;
 
-
 	while (std::getline(ifile, line))
-		std::cout << line << std::endl;
+	{
+		if (line[0] == '#')
+			matchColor(line.substr(1,line.size()-1));
+		else
+			std::cout << line << std::endl;
+	}
 }
 
 void Printer::setForegroundColor(COLOR color)
@@ -47,4 +49,12 @@ void Printer::setForegroundColor(COLOR color)
 			break;
 		}
 	}
+}
+
+void Printer::matchColor(std::string colorString)
+{
+	if (colorString == constants::color::RED) setForegroundColor(COLOR::red);
+	else if(colorString==constants::color::GREEN) setForegroundColor(COLOR::red);
+	else if (colorString == constants::color::BLUE) setForegroundColor(COLOR::blue);
+	else if (colorString == constants::color::YELLOW) setForegroundColor(COLOR::yellow);
 }
