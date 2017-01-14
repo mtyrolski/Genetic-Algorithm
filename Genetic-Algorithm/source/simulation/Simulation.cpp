@@ -1,17 +1,27 @@
 #include "Simulation.hpp"
 
-std::vector<bool*> Simulation::population;
+std::vector<std::vector<bool>> Simulation::population;
 
 void Simulation::createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
 	while (chromosomesAmmount--)
 	{
 		population.emplace_back();
-		population[population.size() - 1] = new bool[genesAmmount];
+		for (uint16_t i = 0; i < genesAmmount; i++) population[population.size() - 1].push_back(rand() % 100 >= 50);
 	}
+}
+
+void Simulation::randomGenes()
+{
+	srand(time(NULL));
+
+	for (auto& chromosomes : Simulation::population)
+		for (auto& genes : chromosomes)
+			genes = rand() % 100 >= 50;
 }
 
 void Simulation::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
 	createPopulation(chromosomesAmmount,genesAmmount);
+	randomGenes();
 }
