@@ -20,6 +20,21 @@ void Simulation::randomGenes()
 			genes = rand() % 100 >= 50;
 }
 
+void Simulation::setAdaption()
+{
+	for (auto& var : population)
+		var.second = std::count(var.first.begin(), var.first.end(), true);
+
+	int sum = 0;
+
+	for (auto& var : population)
+		sum += var.second;
+
+	for (auto& var : population)
+		var.second = var.second / (float)sum;
+
+}
+
 void Simulation::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
 	createPopulation(chromosomesAmmount,genesAmmount);
