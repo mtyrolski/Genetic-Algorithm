@@ -10,6 +10,11 @@ class Simulation
 	static void createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
 	static void randomGenes();
 	static void setAdaption();
+
+	static void firstStageAdaptation();
+	static int sumAdaptadion();
+	static void secondStageAdaptation(int sumAdaptation);
+
 public:
 
 	static void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount);
