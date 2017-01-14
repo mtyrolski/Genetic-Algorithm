@@ -3,6 +3,7 @@
 #include <vector>
 #include <stdlib.h>     
 #include <time.h>     
+#include <algorithm>
 
 class Simulation
 {
@@ -13,6 +14,8 @@ public:
 	static void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount);
 
 private:
-	static std::vector<std::vector<bool>> population;
+
+	//Population { chromosomes/Adaptation)
+	static std::vector<std::pair<std::vector<bool>,float>> population;
 	static void 
 };
