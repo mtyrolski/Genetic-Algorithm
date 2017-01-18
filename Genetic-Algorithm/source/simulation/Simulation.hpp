@@ -22,6 +22,8 @@ class Simulation
 	//Sum
 	static void thirdStageAdaptation();
 
+	static void chooseChromosomes();
+
 public:
 
 	static void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount);
@@ -30,4 +32,7 @@ private:
 
 	//Population { chromosomes/Adaptation)
 	static std::vector<std::pair<std::vector<bool>,float>> population;
+
+	//Population { chromosomes/Adaptation)
+	static std::vector<std::vector<bool>> tempPopulation;
 };
