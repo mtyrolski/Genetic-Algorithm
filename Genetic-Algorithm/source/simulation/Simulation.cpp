@@ -24,13 +24,13 @@ void Simulation::setAdaption()
 {
 	firstStageAdaptation();
 	secondStageAdaptation(countAdaptation());
+	thirdStageAdaptation();
 }
 
 void Simulation::firstStageAdaptation()
 {
 	for (auto& var : population)
 		var.second = std::count(var.first.begin(), var.first.end(), true);
-
 }
 
 int Simulation::countAdaptation()
@@ -49,7 +49,15 @@ void Simulation::secondStageAdaptation(int sumAdaptation)
 		var.second = var.second / (float)sumAdaptation;
 }
 
+void Simulation::thirdStageAdaptation()
+{
+	for (size_t i = 1; i < population.size(); i++)
+		population[i].second += population[i-1].second;
+	
+}
+
 void Simulation::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
 	createPopulation(chromosomesAmmount,genesAmmount);
+	setAdaption();
 }

@@ -11,9 +11,16 @@ class Simulation
 	static void randomGenes();
 	static void setAdaption();
 
+	static int countAdaptation();
+
+	//Counting
 	static void firstStageAdaptation();
-	static int sumAdaptadion();
+
+	//Count -> percent
 	static void secondStageAdaptation(int sumAdaptation);
+
+	//Sum
+	static void thirdStageAdaptation();
 
 public:
 
