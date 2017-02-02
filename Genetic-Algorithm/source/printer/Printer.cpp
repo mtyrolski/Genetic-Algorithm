@@ -23,7 +23,16 @@ void Printer::printMenu()
 
 void Printer::printPopulation(Simulator & simulator)
 {
-	
+	setForegroundColor(COLOR::yellow);
+
+	for (auto&chromosome : simulator.getPopulation())
+	{
+		for (auto&gene : chromosome.first)
+		{
+			std::cout << (int)gene;
+		}
+		std::cout << std::endl;
+	}
 }
 
 void Printer::setForegroundColor(COLOR color)

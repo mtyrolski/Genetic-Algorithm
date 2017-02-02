@@ -14,4 +14,5 @@ namespace constants
 		constexpr auto BLUE = "blue";
 		constexpr auto YELLOW = "yellow";
 	}
+
 }

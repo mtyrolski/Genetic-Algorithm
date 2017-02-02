@@ -13,6 +13,11 @@ void Simulator::createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmou
 	}
 }
 
+std::vector<std::pair<std::vector<bool>, float>> Simulator::getPopulation()
+{
+	return population;
+}
+
 void Simulator::randomGenes()
 {
 	for (auto& chromosomes : population)

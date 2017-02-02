@@ -33,11 +33,13 @@ class Simulator
 
 public:
 
-	Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, float p_m);
+	Simulator(int8_t chromosomesAmmount= 4, int8_t genesAmmount = 8, float p_c = 0.75f, float p_m=0.02f);
 
 	void simulate();
 
 	void createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
+
+	std::vector<std::pair<std::vector<bool>, float>> getPopulation();
 
 private:
 
