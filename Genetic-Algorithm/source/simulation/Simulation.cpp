@@ -1,8 +1,10 @@
 #include "Simulation.hpp"
 
 
-void Simulator::createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
+void Simulator::createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
+	tempPopulation.clear();
+	population.clear();
 	while (chromosomesAmmount--)
 	{
 		population.emplace_back();
@@ -79,7 +81,7 @@ void Simulator::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chro
 {
 	float crossoverProbability = (rand() % 100)/100.f;
 
-	if (crossoverProbability < pk) 
+	if (crossoverProbability < crossoverProbability)
 		return;
 
 	auto firstCopy = chromosomes.first;
@@ -94,14 +96,27 @@ void Simulator::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chro
 	
 }
 
-void Simulator::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float p_k, float p_m)
+void Simulator::mutatePopulation()
 {
-	pm = p_m;
-	pk = p_k;
+}
 
+void Simulator::confirmNewPopulation()
+{
+}
+
+Simulator::Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, float p_m)
+	:mutationProbability(p_m),crossoverProbability(p_c)
+{
+		createNewPopulation(chromosomesAmmount,genesAmmount);
+}
+
+void Simulator::starAlgorithm()
+{
 	srand(time(NULL));
 
-	createPopulation(chromosomesAmmount,genesAmmount);
 	setAdaption();
 	chooseChromosomes();
+	crossPopulation();
+	mutatePopulation();
+	confirmNewPopulation();
 }

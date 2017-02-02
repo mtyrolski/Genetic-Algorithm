@@ -7,7 +7,6 @@
 
 class Simulator
 {
-	void createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
 	void randomGenes();
 	void setAdaption();
 
@@ -28,15 +27,23 @@ class Simulator
 
 	void crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes);
 
+	void mutatePopulation();
+
+	void confirmNewPopulation();
+
 public:
 
-	void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float pk,float pm);
+	Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, float p_m);
+
+	void starAlgorithm();
+
+	void createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
 
 private:
 
-	float pk;
+	float crossoverProbability;
 
-	float pm;
+	float mutationProbability;
 
 	//Population { chromosomes/Adaptation)
 	std::vector<std::pair<std::vector<bool>,float>> population;
