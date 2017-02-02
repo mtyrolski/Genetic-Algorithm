@@ -24,11 +24,19 @@ class Simulation
 
 	static void chooseChromosomes();
 
+	static void crossPopulation();
+
+	static void crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes);
+
 public:
 
-	static void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount);
+	static void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float pk,float pm);
 
 private:
+
+	static float pk;
+
+	static float pm;
 
 	//Population { chromosomes/Adaptation)
 	static std::vector<std::pair<std::vector<bool>,float>> population;

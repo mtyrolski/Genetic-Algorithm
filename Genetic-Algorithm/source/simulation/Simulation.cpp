@@ -2,6 +2,8 @@
 
 std::vector<std::pair<std::vector<bool>, float>> Simulation::population;
 std::vector<std::vector<bool>> Simulation::tempPopulation;
+float Simulation::pk;
+float Simulation::pm;
 
 void Simulation::createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
@@ -70,8 +72,37 @@ void Simulation::chooseChromosomes()
 	}
 }
 
-void Simulation::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount)
+void Simulation::crossPopulation()
 {
+	for (size_t i = 0; i < tempPopulation.size(); i+=2)
+		crossPair(std::pair<std::vector<bool>&, std::vector<bool>&>(tempPopulation[i], tempPopulation[i + 1]));
+	
+}
+
+void Simulation::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes)
+{
+	float crossoverProbability = (rand() % 100)/100.f;
+
+	if (crossoverProbability < pk) 
+		return;
+
+	auto firstCopy = chromosomes.first;
+
+	float lk = rand()%chromosomes.first.size();
+
+	for (int8_t i = lk; i < chromosomes.first.size(); i++)
+		chromosomes.first[i] = chromosomes.second[i];
+
+	for (int8_t i = lk; i < chromosomes.first.size(); i++)
+		chromosomes.second[i] = firstCopy[i];
+	
+}
+
+void Simulation::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float p_k, float p_m)
+{
+	pm = p_m;
+	pk = p_k;
+
 	srand(time(NULL));
 
 	createPopulation(chromosomesAmmount,genesAmmount);
