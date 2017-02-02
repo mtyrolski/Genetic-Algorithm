@@ -1,11 +1,7 @@
 #include "Simulation.hpp"
 
-std::vector<std::pair<std::vector<bool>, float>> Simulation::population;
-std::vector<std::vector<bool>> Simulation::tempPopulation;
-float Simulation::pk;
-float Simulation::pm;
 
-void Simulation::createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
+void Simulator::createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
 	while (chromosomesAmmount--)
 	{
@@ -14,27 +10,27 @@ void Simulation::createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount
 	}
 }
 
-void Simulation::randomGenes()
+void Simulator::randomGenes()
 {
-	for (auto& chromosomes : Simulation::population)
+	for (auto& chromosomes : population)
 		for (auto& genes : chromosomes.first)
 			genes = rand() % 100 >= 50;
 }
 
-void Simulation::setAdaption()
+void Simulator::setAdaption()
 {
 	firstStageAdaptation();
 	secondStageAdaptation(countAdaptation());
 	thirdStageAdaptation();
 }
 
-void Simulation::firstStageAdaptation()
+void Simulator::firstStageAdaptation()
 {
 	for (auto& var : population)
 		var.second = std::count(var.first.begin(), var.first.end(), true);
 }
 
-int Simulation::countAdaptation()
+int Simulator::countAdaptation()
 {
 	int sum = 0;
 
@@ -44,20 +40,20 @@ int Simulation::countAdaptation()
 	return sum;
 }
 
-void Simulation::secondStageAdaptation(int sumAdaptation)
+void Simulator::secondStageAdaptation(int sumAdaptation)
 {
 	for (auto& var : population)
 		var.second = var.second / (float)sumAdaptation;
 }
 
-void Simulation::thirdStageAdaptation()
+void Simulator::thirdStageAdaptation()
 {
 	for (size_t i = 1; i < population.size(); i++)
 		population[i].second += population[i-1].second;
 	
 }
 
-void Simulation::chooseChromosomes()
+void Simulator::chooseChromosomes()
 {
 	std::vector<uint8_t> randomNumbers;
 
@@ -72,14 +68,14 @@ void Simulation::chooseChromosomes()
 	}
 }
 
-void Simulation::crossPopulation()
+void Simulator::crossPopulation()
 {
 	for (size_t i = 0; i < tempPopulation.size(); i+=2)
 		crossPair(std::pair<std::vector<bool>&, std::vector<bool>&>(tempPopulation[i], tempPopulation[i + 1]));
 	
 }
 
-void Simulation::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes)
+void Simulator::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes)
 {
 	float crossoverProbability = (rand() % 100)/100.f;
 
@@ -98,7 +94,7 @@ void Simulation::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chr
 	
 }
 
-void Simulation::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float p_k, float p_m)
+void Simulator::starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float p_k, float p_m)
 {
 	pm = p_m;
 	pk = p_k;

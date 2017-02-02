@@ -5,42 +5,42 @@
 #include <time.h>     
 #include <algorithm>
 
-class Simulation
+class Simulator
 {
-	static void createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
-	static void randomGenes();
-	static void setAdaption();
+	void createPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
+	void randomGenes();
+	void setAdaption();
 
-	static int countAdaptation();
+	int countAdaptation();
 
 	//Counting
-	static void firstStageAdaptation();
+	void firstStageAdaptation();
 
 	//Count -> percent
-	static void secondStageAdaptation(int sumAdaptation);
+	void secondStageAdaptation(int sumAdaptation);
 
 	//Sum
-	static void thirdStageAdaptation();
+	void thirdStageAdaptation();
 
-	static void chooseChromosomes();
+	void chooseChromosomes();
 
-	static void crossPopulation();
+	void crossPopulation();
 
-	static void crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes);
+	void crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes);
 
 public:
 
-	static void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float pk,float pm);
+	void starAlgorithm(int8_t chromosomesAmmount, int8_t genesAmmount,float pk,float pm);
 
 private:
 
-	static float pk;
+	float pk;
 
-	static float pm;
-
-	//Population { chromosomes/Adaptation)
-	static std::vector<std::pair<std::vector<bool>,float>> population;
+	float pm;
 
 	//Population { chromosomes/Adaptation)
-	static std::vector<std::vector<bool>> tempPopulation;
+	std::vector<std::pair<std::vector<bool>,float>> population;
+
+	//Population { chromosomes/Adaptation)
+	std::vector<std::vector<bool>> tempPopulation;
 };
