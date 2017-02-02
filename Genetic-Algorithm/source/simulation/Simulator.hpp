@@ -49,5 +49,5 @@ private:
 	std::vector<std::pair<std::vector<bool>,float>> population;
 
 	//Population { chromosomes/Adaptation)
-	std::vector<std::vector<bool>> tempPopulation;
+	std::vector<std::vector<bool>> tempPopulation; //to remove
 };

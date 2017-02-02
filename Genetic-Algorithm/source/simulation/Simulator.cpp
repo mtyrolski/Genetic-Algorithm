@@ -1,4 +1,4 @@
-#include "Simulation.hpp"
+#include "Simulator.hpp"
 
 
 void Simulator::createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
