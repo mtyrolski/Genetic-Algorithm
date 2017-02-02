@@ -21,6 +21,11 @@ void Printer::printMenu()
 	}
 }
 
+void Printer::printPopulation(Simulator & simulator)
+{
+	
+}
+
 void Printer::setForegroundColor(COLOR color)
 {
 	switch (color)

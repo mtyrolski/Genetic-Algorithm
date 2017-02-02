@@ -128,7 +128,7 @@ Simulator::Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, 
 		createNewPopulation(chromosomesAmmount,genesAmmount);
 }
 
-void Simulator::starAlgorithm()
+void  Simulator::simulate()
 {
 	srand(time(NULL));
 

@@ -7,13 +7,15 @@
 #include <string>
 
 #include "config/Config.hpp"
+#include "simulator/Simulator.hpp"
 
 class Printer
 {
 public:
 	Printer();
 	void printMenu();
-	
+	void printPopulation(Simulator& simulator);
+
 private:
 
 	enum class COLOR

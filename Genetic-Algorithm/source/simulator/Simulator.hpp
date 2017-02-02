@@ -35,7 +35,7 @@ public:
 
 	Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, float p_m);
 
-	void starAlgorithm();
+	void simulate();
 
 	void createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
 
