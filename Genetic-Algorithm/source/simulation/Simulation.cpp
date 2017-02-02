@@ -5,6 +5,7 @@ void Simulator::createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmou
 {
 	tempPopulation.clear();
 	population.clear();
+
 	while (chromosomesAmmount--)
 	{
 		population.emplace_back();
@@ -34,7 +35,7 @@ void Simulator::firstStageAdaptation()
 
 int Simulator::countAdaptation()
 {
-	int sum = 0;
+	auto sum = 0;
 
 	for (auto& var : population)
 		sum += var.second;
@@ -79,7 +80,7 @@ void Simulator::crossPopulation()
 
 void Simulator::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes)
 {
-	float crossoverProbability = (rand() % 100)/100.f;
+	auto crossoverProbability = (rand() % 100)/100.f;
 
 	if (crossoverProbability < crossoverProbability)
 		return;
@@ -98,10 +99,27 @@ void Simulator::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chro
 
 void Simulator::mutatePopulation()
 {
+	float p_m;
+
+	for (auto & chromosome : tempPopulation)
+	{
+		for (auto & gene : chromosome)
+		{
+			p_m = (rand() % 100) / 100.f;
+			
+			if (p_m < mutationProbability)
+				gene = !gene;
+		}
+	}
+
 }
 
 void Simulator::confirmNewPopulation()
 {
+	for (size_t i = 0; i < population.size(); i++)
+		population[i].first = tempPopulation[i];
+	
+	setAdaption();
 }
 
 Simulator::Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, float p_m)
