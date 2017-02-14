@@ -15,6 +15,7 @@ public:
 	Printer();
 	void printMenu();
 	void printPopulation(Simulator& simulator);
+	void clear();
 
 private:
 

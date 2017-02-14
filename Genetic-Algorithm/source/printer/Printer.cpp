@@ -35,6 +35,11 @@ void Printer::printPopulation(Simulator & simulator)
 	}
 }
 
+void Printer::clear()
+{
+	system("cls");
+}
+
 void Printer::setForegroundColor(COLOR color)
 {
 	switch (color)
