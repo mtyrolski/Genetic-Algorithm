@@ -21,15 +21,15 @@ class Simulator
 	//Sum
 	void thirdStageAdaptation();
 
-	void chooseChromosomes();
+	void chooseChromosomes(std::vector<std::vector<bool>>& tempPopulation);
 
-	void crossPopulation();
+	void crossPopulation(std::vector<std::vector<bool>>& tempPopulation);
 
 	void crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes);
 
-	void mutatePopulation();
+	void mutatePopulation(std::vector<std::vector<bool>>& tempPopulation);
 
-	void confirmNewPopulation();
+	void confirmNewPopulation(std::vector<std::vector<bool>>& tempPopulation);
 
 public:
 
@@ -49,7 +49,4 @@ private:
 
 	//Population { chromosomes/Adaptation)
 	std::vector<std::pair<std::vector<bool>,float>> population;
-
-	//Population { chromosomes/Adaptation)
-	std::vector<std::vector<bool>> tempPopulation; //to remove
 };

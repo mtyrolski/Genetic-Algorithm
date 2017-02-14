@@ -3,7 +3,6 @@
 
 void Simulator::createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount)
 {
-	tempPopulation.clear();
 	population.clear();
 
 	while (chromosomesAmmount--)
@@ -60,7 +59,7 @@ void Simulator::thirdStageAdaptation()
 		population[i].second += population[i-1].second;
 }
 
-void Simulator::chooseChromosomes()
+void Simulator::chooseChromosomes(std::vector<std::vector<bool>>& tempPopulation)
 {
 	std::vector<int> randomNumbers;
 
@@ -81,7 +80,7 @@ void Simulator::chooseChromosomes()
 	}
 }
 
-void Simulator::crossPopulation()
+void Simulator::crossPopulation(std::vector<std::vector<bool>>& tempPopulation)
 {
 	for (size_t i = 0; i < tempPopulation.size(); i+=2)
 		crossPair(std::pair<std::vector<bool>&, std::vector<bool>&>(tempPopulation[i], tempPopulation[i + 1]));
@@ -107,7 +106,7 @@ void Simulator::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chro
 	
 }
 
-void Simulator::mutatePopulation()
+void Simulator::mutatePopulation(std::vector<std::vector<bool>>& tempPopulation)
 {
 	float p_m;
 
@@ -124,7 +123,7 @@ void Simulator::mutatePopulation()
 
 }
 
-void Simulator::confirmNewPopulation()
+void Simulator::confirmNewPopulation(std::vector<std::vector<bool>>& tempPopulation)
 {
 	for (size_t i = 0; i < population.size(); i++)
 		population[i].first = tempPopulation[i];
@@ -142,13 +141,16 @@ void Simulator::simulate(int generations)
 {
 	srand(time(NULL));
 
+
 	for (size_t i = 0; i < generations; i++)
 	{
+		//Population { chromosomes/Adaptation)
+		std::vector<std::vector<bool>> tempPopulation;
+
 		setAdaption();
-		chooseChromosomes();
-		crossPopulation();
-		mutatePopulation();
-		confirmNewPopulation();	
-		tempPopulation.clear();
+		chooseChromosomes(tempPopulation);
+		crossPopulation(tempPopulation);
+		mutatePopulation(tempPopulation);
+		confirmNewPopulation(tempPopulation);
 	}
 }
