@@ -33,9 +33,9 @@ class Simulator
 
 public:
 
-	Simulator(int8_t chromosomesAmmount= 4, int8_t genesAmmount = 8, float p_c = 0.75f, float p_m=0.02f);
+	Simulator(int8_t chromosomesAmmount= 8, int8_t genesAmmount = 8, float p_c = 0.75f, float p_m=0.02f);
 
-	void simulate();
+	void simulate(int generations);
 
 	void createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
 

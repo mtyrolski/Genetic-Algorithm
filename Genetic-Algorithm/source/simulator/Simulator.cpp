@@ -9,7 +9,7 @@ void Simulator::createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmou
 	while (chromosomesAmmount--)
 	{
 		population.emplace_back();
-		for (uint16_t i = 0; i < genesAmmount; i++) population[population.size() - 1].first.push_back(rand() % 100 >= 50);
+		for (uint16_t i = 0; i < genesAmmount; i++) population[population.size() - 1].first.emplace_back(rand() % 100 >= 50);
 	}
 }
 
@@ -51,28 +51,33 @@ int Simulator::countAdaptation()
 void Simulator::secondStageAdaptation(int sumAdaptation)
 {
 	for (auto& var : population)
-		var.second = var.second / (float)sumAdaptation;
+		var.second /= (float)sumAdaptation;
 }
 
 void Simulator::thirdStageAdaptation()
 {
 	for (size_t i = 1; i < population.size(); i++)
 		population[i].second += population[i-1].second;
-	
 }
 
 void Simulator::chooseChromosomes()
 {
-	std::vector<uint8_t> randomNumbers;
+	std::vector<int> randomNumbers;
 
 	for (size_t i = 0; i < population.size(); i++)
-		randomNumbers.push_back(rand()%100);
-	
+		randomNumbers.emplace_back(rand()%100);
+
 	for (auto&number : randomNumbers)
 	{
 		for (size_t i = 0; i < population.size(); i++)
-			if (number < population[i].second)
-				tempPopulation.push_back(population[i-1].first);
+		{
+			if (number < population[i].second * 100)
+			{
+				tempPopulation.emplace_back(population[i].first);
+				break;
+			}
+		}
+			
 	}
 }
 
@@ -85,14 +90,14 @@ void Simulator::crossPopulation()
 
 void Simulator::crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes)
 {
-	auto crossoverProbability = (rand() % 100)/100.f;
+	auto crossoverProb = (rand() % 100)/100.f;
 
-	if (crossoverProbability < crossoverProbability)
+	if (crossoverProb < crossoverProbability)
 		return;
 
 	auto firstCopy = chromosomes.first;
 
-	float lk = rand()%chromosomes.first.size();
+	int lk = rand()%chromosomes.first.size();
 
 	for (int8_t i = lk; i < chromosomes.first.size(); i++)
 		chromosomes.first[i] = chromosomes.second[i];
@@ -133,13 +138,17 @@ Simulator::Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, 
 		createNewPopulation(chromosomesAmmount,genesAmmount);
 }
 
-void  Simulator::simulate()
+void Simulator::simulate(int generations)
 {
 	srand(time(NULL));
 
-	setAdaption();
-	chooseChromosomes();
-	crossPopulation();
-	mutatePopulation();
-	confirmNewPopulation();
+	for (size_t i = 0; i < generations; i++)
+	{
+		setAdaption();
+		chooseChromosomes();
+		crossPopulation();
+		mutatePopulation();
+		confirmNewPopulation();	
+		tempPopulation.clear();
+	}
 }
