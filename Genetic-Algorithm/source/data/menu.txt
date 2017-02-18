@@ -9,6 +9,5 @@
 
 #red
 
-[1] - soon
-[2] - soon
-[3] - soon
+[1] - Use algorithm
+[2] - Exit

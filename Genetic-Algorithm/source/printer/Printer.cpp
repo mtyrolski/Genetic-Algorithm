@@ -6,9 +6,9 @@ Printer::Printer()
 	hout = GetStdHandle(STD_OUTPUT_HANDLE);
 }
 
-void Printer::printMenu()
+void Printer::print(std::string&& path)
 {
-	std::ifstream ifile(constants::path::menu, std::ifstream::in);
+	std::ifstream ifile(path, std::ifstream::in);
 
 	std::string line;
 
@@ -73,7 +73,7 @@ void Printer::setForegroundColor(COLOR color)
 void Printer::matchColor(std::string colorString)
 {
 	if (colorString == constants::color::RED) setForegroundColor(COLOR::red);
-	else if(colorString==constants::color::GREEN) setForegroundColor(COLOR::red);
+	else if(colorString==constants::color::GREEN) setForegroundColor(COLOR::green);
 	else if (colorString == constants::color::BLUE) setForegroundColor(COLOR::blue);
 	else if (colorString == constants::color::YELLOW) setForegroundColor(COLOR::yellow);
 }

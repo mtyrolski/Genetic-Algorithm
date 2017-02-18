@@ -1,27 +1,26 @@
 #include "printer/Printer.hpp"
 #include "simulator/Simulator.hpp"
 #include "program/Program.hpp"
+
 #include <conio.h>
 #include <iostream>
+
+#pragma warning(disable : 4996)
 
 int main()
 {
 	Printer printer;
 	Simulator simulator;
-	Program program;
+	Program program(printer);
+
+	printer.print("source/data/menu.txt");
 
 	while (program.running())
 	{
 		if (kbhit)
-		{
-			unsigned char mark = getch();
-			switch (mark)
-			{
-			case 1: printer.clear();
-			case 2: program.stop(); break;
-			}
-		}
+			program.takeAction(getch());
 	}
+
 	
 
 	return 0;

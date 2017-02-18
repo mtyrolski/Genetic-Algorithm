@@ -13,7 +13,7 @@ class Printer
 {
 public:
 	Printer();
-	void printMenu();
+	void print(std::string&& path);
 	void printPopulation(Simulator& simulator);
 	void clear();
 

@@ -1,8 +1,8 @@
 #include "Program.hpp"
 
-Program::Program()
+Program::Program(Printer & _printer)
+	:state(MENU),printer(_printer)
 {
-	state = ON;
 }
 
 void Program::stop()
@@ -12,5 +12,30 @@ void Program::stop()
 
 bool Program::running()
 {
-	return state == ON;
+	return state != OFF;
+}
+
+void Program::takeAction(unsigned char && mark)
+{
+	switch(state)
+	{ 
+		case MENU:
+		{
+			switch (mark)
+			{
+			case '1': printer.clear(); printer.print("source/data/data_loading.txt"); break;
+			case '2': this->stop(); return;
+			}	
+		}
+	}
+}
+
+void Program::setState(STATE _state)
+{
+	state = _state;
+}
+
+Program::STATE Program::getState()
+{
+	return state;
 }
