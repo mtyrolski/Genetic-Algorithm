@@ -8,12 +8,12 @@
 class Simulator
 {
 	void randomGenes();
-	void setAdaption();
+	void setAdaption(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
 
 	int countAdaptation();
 
 	//Counting
-	void firstStageAdaptation();
+	void firstStageAdaptation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
 
 	//Count -> percent
 	void secondStageAdaptation(int sumAdaptation);
@@ -21,15 +21,15 @@ class Simulator
 	//Sum
 	void thirdStageAdaptation();
 
-	void chooseChromosomes(std::vector<std::vector<bool>>& tempPopulation);
+	void chooseChromosomes(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
 
-	void crossPopulation(std::vector<std::vector<bool>>& tempPopulation);
+	void crossPopulation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
 
 	void crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes);
 
-	void mutatePopulation(std::vector<std::vector<bool>>& tempPopulation);
+	void mutatePopulation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
 
-	void confirmNewPopulation(std::vector<std::vector<bool>>& tempPopulation);
+	void confirmNewPopulation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
 
 public:
 
@@ -39,14 +39,17 @@ public:
 
 	void createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
 
-	std::vector<std::pair<std::vector<bool>, float>> getPopulation();
-
+	// population{chromosomes/Adaptation}/number
+	std::vector<std::pair<std::vector<bool>, float>>& getPopulation(int number);
+	
 private:
 
 	float crossoverProbability;
 
 	float mutationProbability;
 
-	//Population { chromosomes/Adaptation)
+	//Population {chromosomes/Adaptation}
 	std::vector<std::pair<std::vector<bool>,float>> population;
+
+	std::vector<std::vector<std::pair<std::vector<bool>, float>>> history;
 };

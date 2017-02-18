@@ -37,6 +37,13 @@ void Program::takeAction(unsigned char && mark)
 			case '2': state = MENU; printer.clear();  printer.print("source/data/menu.txt"); return;
 			}
 		}
+
+		case SIMULATION:
+		{
+		case 'a': 
+		case 'd':
+		case 'j':
+		}
 	}
 }
 
@@ -79,15 +86,15 @@ void Program::loadData()
 		printer.clear();
 		state = STARTING_SIMULATION;
 		printer.print("source/data/starting_simulation.txt");
-		return;
 	}
 	else
 	{
 		printer.clear();
 		Simulator simulator(ammountOfChromosomes, ammountOfGenes, crossoverPropability, mutationPropability);
 		simulator.simulate(cycles);
+		state = SIMULATION;
+		printer.print("source/data/simulation.txt");
 	}
-
 }
 
 Program::STATE Program::getState()
