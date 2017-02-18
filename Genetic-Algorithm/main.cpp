@@ -10,7 +10,7 @@
 int main()
 {
 	Printer printer;
-	Simulator simulator;
+
 	Program program(printer);
 
 	printer.print("source/data/menu.txt");

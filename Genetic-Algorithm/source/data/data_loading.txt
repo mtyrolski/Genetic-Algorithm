@@ -1,13 +1,29 @@
-#yellow
-
-/~_ _  _  _ _|_|_ . _
-\_/(/_| |(/_ | | ||(_
-                     
- /\ | _  _  _._|_|_  _ _ 
-/~~\|(_|(_)| | | | || | |
-      _|    
+#red
+Definitions:
 
 #green
+ammount of chromosomes >0
+#yellow
+ammount of arrays of bits like that: {0,1,0,0,0,1}
 
-[1] - Enter initial values...
-[2] - Back
+
+#green
+ammount of genes >0
+#yellow
+ammount of bits in array  {0,1,0,0,0,1} <=> 6 genes
+
+#green
+crossover propability <0;1>
+#yellow
+This sets how likely to crossover two different chromosomes
+
+
+#green
+mutatuin propability <0;1>
+#yellow
+This sets how likely to mutate each gene 
+for example:
+1 <=> bit before mutation
+0 <=> bit after mutation
+
+

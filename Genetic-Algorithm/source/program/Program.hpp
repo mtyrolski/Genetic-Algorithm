@@ -1,6 +1,7 @@
 #pragma once
 
 #include "printer/Printer.hpp"
+#include "simulator/Simulator.hpp"
 
 class Program final
 {
@@ -9,19 +10,22 @@ public:
 	{
 		OFF,
 		MENU,
+		STARTING_SIMULATION,
 		DATA_LOADING,
 		HISTORY_VIEW
 	};
 
-	Program(Printer &printer);
+	Program(Printer&);
 
 	void stop();
 
 	bool running();
 
-	void takeAction(unsigned char&& mark);
+	void takeAction(unsigned char&&);
 
-	void setState(STATE _state);
+	void setState(STATE);
+
+	void loadData();
 
 	STATE getState();
 

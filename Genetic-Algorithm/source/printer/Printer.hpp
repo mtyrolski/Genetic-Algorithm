@@ -12,13 +12,6 @@
 class Printer
 {
 public:
-	Printer();
-	void print(std::string&& path);
-	void printPopulation(Simulator& simulator);
-	void clear();
-
-private:
-
 	enum class COLOR
 	{
 		red,
@@ -27,7 +20,14 @@ private:
 		yellow
 	};
 
+	Printer();
+	void print(std::string&& path);
+	void printPopulation(Simulator& simulator);
+	void clear();
 	void setForegroundColor(COLOR color);
+
+private:
+
 	void matchColor(std::string colorString);
 
 	HANDLE hout;
