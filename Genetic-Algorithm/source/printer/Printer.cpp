@@ -23,16 +23,21 @@ void Printer::print(std::string&& path)
 
 void Printer::printPopulation(Simulator & simulator, int number)
 {
-	setForegroundColor(COLOR::yellow);
-
-	for (auto& chromosomeSet : simulator.getPopulation(number))
+	for (auto&chromosome : simulator.getHistory(number))
 	{
-		for (auto&gene : chromosomeSet.first)
+		for (auto&gene : chromosome)
 		{
+			if (gene)
+				setForegroundColor(COLOR::green);
+			else
+				setForegroundColor(COLOR::red);
+
 			std::cout << (int)gene;
 		}
 		std::cout << std::endl;
 	}
+
+	
 }
 
 void Printer::clear()

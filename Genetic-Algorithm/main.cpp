@@ -20,9 +20,6 @@ int main()
 	{
 		if (kbhit)
 			program.takeAction(getch());
-	}
-
-	
-
+	}	
 	return 0;
 }

@@ -65,7 +65,7 @@ void Program::setState(STATE _state)
 void Program::loadData()
 {
 
-	int8_t ammountOfChromosomes, ammountOfGenes;
+	int ammountOfChromosomes, ammountOfGenes;
 	float crossoverPropability, mutationPropability;
 	int cycles;
 
@@ -105,6 +105,7 @@ void Program::loadData()
 		state = SIMULATION;
 		number = 0;
 		printer.printDescription(number,simulator.getHistorySize());
+		printer.printPopulation(simulator, 0);
 	}
 }
 

@@ -12,54 +12,52 @@ class Simulator
 
 	int countAdaptation();
 
-	//Counting for statistics
-	void firstStageAdaptation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
-
-	//Counting for simulation
+	//Counting
 	void firstStageAdaptation();
-
 
 	//Count -> percent
 	void secondStageAdaptation(int sumAdaptation);
 
-
 	//Sum
 	void thirdStageAdaptation();
 
-	void chooseChromosomes(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
+	void chooseChromosomes(std::vector<std::vector<bool>>& tempPopulation);
 
-	void crossPopulation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
+	void crossPopulation(std::vector<std::vector<bool>>& tempPopulation);
 
 	void crossPair(std::pair<std::vector<bool>&, std::vector<bool>&> chromosomes);
 
-	void mutatePopulation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
+	void mutatePopulation(std::vector<std::vector<bool>>& tempPopulation);
 
-	void confirmNewPopulation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
+	void confirmNewPopulation(std::vector<std::vector<bool>>& tempPopulation);
 
 public:
 
-	Simulator(int8_t chromosomesAmmount= 8, int8_t genesAmmount = 8, float p_c = 0.75f, float p_m=0.02f);
-
-	void setPropeties(int8_t chromosomesAmmount = 8, int8_t genesAmmount = 8, float p_c = 0.75f, float p_m = 0.02f);
-
+	Simulator(int chromosomesAmmount = 8, int genesAmmount = 8, float p_c = 0.75f, float p_m = 0.02f);
 
 	void simulate(int generations);
 
-	void createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
+	void createNewPopulation(int chromosomesAmmount=8, int genesAmmoun=8);
 
-	// population{chromosomes/Adaptation}/number
-	std::vector<std::pair<std::vector<bool>, float>>& getPopulation(int number);
+	std::vector<std::pair<std::vector<bool>, float>> getPopulation();
+
+	std::vector<std::vector<bool>> getHistory(int number);
 
 	int getHistorySize();
-	
+
+	void setPropeties(int chromosomesAmmount = 8, int genesAmmount = 8, float p_c = 0.75f, float p_m = 0.02f);
+
+
+
 private:
 
 	float crossoverProbability;
 
 	float mutationProbability;
 
-	//Population {chromosomes/Adaptation}
-	std::vector<std::pair<std::vector<bool>,float>> population;
+	//Population { chromosomes/Adaptation)
+	std::vector<std::pair<std::vector<bool>, float>> population;
 
-	std::vector<std::vector<std::pair<std::vector<bool>, float>>> history;
+	//Population{chromosomes{genes}}
+	std::vector<std::vector<std::vector<bool>>> history;
 };
