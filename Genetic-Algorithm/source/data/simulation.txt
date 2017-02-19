@@ -1,5 +1,4 @@
 #yellow
 Simulation has been ended.
 Press 'a' and 'd' to change cycle 
-or 'j' to jump to specific cycle
-
+Click "X" to exit program

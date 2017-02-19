@@ -89,7 +89,7 @@ void Program::loadData()
 	if (ammountOfChromosomes <= 0 || ammountOfGenes <= 0 ||
 		crossoverPropability < 0 || crossoverPropability>1 ||
 		mutationPropability < 0 || mutationPropability>1||
-		cycles<=0)
+		cycles<=0 || ammountOfChromosomes%2!=0)
 	{
 		std::cout << "You have entered wrong data... try again...";
 		Sleep(1500);

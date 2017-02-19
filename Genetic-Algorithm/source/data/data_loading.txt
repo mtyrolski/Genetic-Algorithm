@@ -2,7 +2,7 @@
 Definitions:
 
 #green
-ammount of chromosomes >0
+ammount of chromosomes >0 && even
 #yellow
 ammount of arrays of bits like that: {0,1,0,0,0,1}
 
