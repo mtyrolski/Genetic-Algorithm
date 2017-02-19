@@ -14,10 +14,12 @@ void Simulator::createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmou
 
 std::vector<std::pair<std::vector<bool>, float>>& Simulator::getPopulation(int number)
 {
-	if (number < 0)number = history.size() + number;
-	if (number > history.size() - 1) number %= history.size();
-
 	return history[number];
+}
+
+int Simulator::getHistorySize()
+{
+	return history.size();
 }
 
 void Simulator::randomGenes()
@@ -27,14 +29,20 @@ void Simulator::randomGenes()
 			genes = rand() % 100 >= 50;
 }
 
-void Simulator::setAdaption(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation)
+void Simulator::setAdaption()
 {
-	firstStageAdaptation(tempPopulation);
+	firstStageAdaptation();
 	secondStageAdaptation(countAdaptation());
 	thirdStageAdaptation();
 }
 
 void Simulator::firstStageAdaptation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation)
+{
+	for (size_t i = 0; i < population.size(); i++)
+		tempPopulation[i].second = std::count(population[i].first.begin(), population[i].first.end(), true);
+}
+
+void Simulator::firstStageAdaptation()
 {
 	for (auto& var : population)
 		var.second = std::count(var.first.begin(), var.first.end(), true);
@@ -75,7 +83,7 @@ void Simulator::chooseChromosomes(std::vector<std::pair<std::vector<bool>, float
 		{
 			if (number < population[i].second * 100)
 			{
-				tempPopulation.emplace_back(population[i].first);
+				tempPopulation.emplace_back(population[i]);
 				break;
 			}
 		}
@@ -131,13 +139,20 @@ void Simulator::confirmNewPopulation(std::vector<std::pair<std::vector<bool>, fl
 	for (size_t i = 0; i < population.size(); i++)
 		population[i].first = tempPopulation[i].first;
 	
-	setAdaption(tempPopulation);
+	setAdaption();
 }
 
 Simulator::Simulator(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, float p_m)
-	:mutationProbability(p_m),crossoverProbability(p_c)
 {
-		createNewPopulation(chromosomesAmmount,genesAmmount);
+	setPropeties(chromosomesAmmount, genesAmmount, p_c, p_m);
+}
+
+void Simulator::setPropeties(int8_t chromosomesAmmount, int8_t genesAmmount, float p_c, float p_m)
+{
+	mutationProbability = p_m;
+	crossoverProbability = p_c;
+
+	createNewPopulation(chromosomesAmmount, genesAmmount);
 }
 
 void Simulator::simulate(int generations)
@@ -150,11 +165,13 @@ void Simulator::simulate(int generations)
 		//Population { chromosomes/Adaptation)
 		std::vector<std::pair<std::vector<bool>,float>> tempPopulation;
 
-		setAdaption(tempPopulation);
+		setAdaption();
 		chooseChromosomes(tempPopulation);
 		crossPopulation(tempPopulation);
 		mutatePopulation(tempPopulation);
 		confirmNewPopulation(tempPopulation);
+
+		firstStageAdaptation(tempPopulation);
 
 		history.push_back(tempPopulation);
 	}

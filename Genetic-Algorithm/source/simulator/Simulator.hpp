@@ -8,15 +8,20 @@
 class Simulator
 {
 	void randomGenes();
-	void setAdaption(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
+	void setAdaption();
 
 	int countAdaptation();
 
-	//Counting
+	//Counting for statistics
 	void firstStageAdaptation(std::vector<std::pair<std::vector<bool>, float>>& tempPopulation);
+
+	//Counting for simulation
+	void firstStageAdaptation();
+
 
 	//Count -> percent
 	void secondStageAdaptation(int sumAdaptation);
+
 
 	//Sum
 	void thirdStageAdaptation();
@@ -35,12 +40,17 @@ public:
 
 	Simulator(int8_t chromosomesAmmount= 8, int8_t genesAmmount = 8, float p_c = 0.75f, float p_m=0.02f);
 
+	void setPropeties(int8_t chromosomesAmmount = 8, int8_t genesAmmount = 8, float p_c = 0.75f, float p_m = 0.02f);
+
+
 	void simulate(int generations);
 
 	void createNewPopulation(int8_t chromosomesAmmount, int8_t genesAmmount);
 
 	// population{chromosomes/Adaptation}/number
 	std::vector<std::pair<std::vector<bool>, float>>& getPopulation(int number);
+
+	int getHistorySize();
 	
 private:
 

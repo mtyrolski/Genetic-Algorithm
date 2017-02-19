@@ -1,7 +1,7 @@
 #include "Program.hpp"
 
-Program::Program(Printer& _printer)
-:state(MENU),printer(_printer)
+Program::Program(Printer& _printer, Simulator& _simulator)
+:state(MENU),printer(_printer),simulator(_simulator),number(0)
 {
 }
 
@@ -18,13 +18,16 @@ bool Program::running()
 
 void Program::takeAction(unsigned char && mark)
 {
+	printer.clear();
+
 	switch(state)
-	{ 
+	{	
 		case MENU:
 		{
 			switch (mark)
 			{
-			case '1': state = STARTING_SIMULATION;  printer.clear(); printer.print("source/data/starting_simulation.txt"); return;
+			
+			case '1': state = STARTING_SIMULATION; printer.print("source/data/starting_simulation.txt"); return;
 			case '2': this->stop(); return;
 			}	
 		}
@@ -33,16 +36,23 @@ void Program::takeAction(unsigned char && mark)
 		{
 			switch (mark)
 			{
-			case '1': state = DATA_LOADING; printer.clear(); printer.print("source/data/data_loading.txt"); this->loadData(); return;
-			case '2': state = MENU; printer.clear();  printer.print("source/data/menu.txt"); return;
+			case '1': state = DATA_LOADING; printer.print("source/data/data_loading.txt"); this->loadData(); return;
+			case '2': state = MENU; printer.print("source/data/menu.txt"); return;
 			}
 		}
 
 		case SIMULATION:
 		{
-		case 'a': 
-		case 'd':
-		case 'j':
+			switch (mark)
+			{
+			case 'a': number--;  break;
+			case 'd': number++; break;
+			}
+
+			printer.printDescription(number, simulator.getHistorySize());
+			printer.printPopulation(simulator, number);
+
+			break;
 		}
 	}
 }
@@ -90,10 +100,11 @@ void Program::loadData()
 	else
 	{
 		printer.clear();
-		Simulator simulator(ammountOfChromosomes, ammountOfGenes, crossoverPropability, mutationPropability);
+		simulator.setPropeties(ammountOfChromosomes, ammountOfGenes, crossoverPropability, mutationPropability);
 		simulator.simulate(cycles);
 		state = SIMULATION;
-		printer.print("source/data/simulation.txt");
+		number = 0;
+		printer.printDescription(number,simulator.getHistorySize());
 	}
 }
 

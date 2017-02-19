@@ -16,7 +16,7 @@ public:
 		HISTORY_VIEW
 	};
 
-	Program(Printer&);
+	Program(Printer&, Simulator&);
 
 	void stop();
 
@@ -32,5 +32,9 @@ public:
 
 private:
 	Printer& printer;
+	Simulator& simulator;
 	STATE state;
+
+	//Number for scroll history
+	int number;
 };

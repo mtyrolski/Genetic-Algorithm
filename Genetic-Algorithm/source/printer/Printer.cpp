@@ -21,13 +21,13 @@ void Printer::print(std::string&& path)
 	}
 }
 
-void Printer::printPopulation(Simulator & simulator)
+void Printer::printPopulation(Simulator & simulator, int number)
 {
 	setForegroundColor(COLOR::yellow);
 
-	for (auto&chromosome : simulator.getPopulation())
+	for (auto& chromosomeSet : simulator.getPopulation(number))
 	{
-		for (auto&gene : chromosome.first)
+		for (auto&gene : chromosomeSet.first)
 		{
 			std::cout << (int)gene;
 		}
@@ -68,6 +68,24 @@ void Printer::setForegroundColor(COLOR color)
 			break;
 		}
 	}
+}
+
+void Printer::printDescription(int& number, int&& historySize)
+{
+	this->print("source/data/simulation.txt");
+
+	if (number > historySize - 1) number = 0;
+	else if (number < 0) number = historySize - 1;
+
+	this->setForegroundColor(Printer::COLOR::red);
+	std::cout << "Cycle: ";
+	this->setForegroundColor(Printer::COLOR::green);
+	std::cout << number;
+	this->setForegroundColor(Printer::COLOR::red);
+	std::cout << " / ";
+	this->setForegroundColor(Printer::COLOR::green);
+	std::cout << historySize - 1 << std::endl;
+	this->setForegroundColor(Printer::COLOR::yellow);
 }
 
 void Printer::matchColor(std::string colorString)

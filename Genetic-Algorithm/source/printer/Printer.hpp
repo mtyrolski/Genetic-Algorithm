@@ -22,9 +22,10 @@ public:
 
 	Printer();
 	void print(std::string&& path);
-	void printPopulation(Simulator& simulator);
+	void printPopulation(Simulator& simulator, int number);
 	void clear();
 	void setForegroundColor(COLOR color);
+	void printDescription(int& number, int&& historySize);
 
 private:
 
